@@ -33,3 +33,86 @@ while (opcion != 0) {
 alert('el total de la compra es de: ' + total);
 
 alert('Gracias por su compra');
+
+
+//Hasta áca es la primer entrega//
+//segunda entrega//
+
+class Producto {
+    constructor(nombre, precio, cantidad) {
+        this.nombre = nombre.toUpperCase();
+        this.precio = parseFloat(precio);
+        this.cantidad = cantidad;
+    }
+}
+
+const listaDeCompras = [
+    new Producto("JABÓN DE ALMENDRA", 1500, 1),
+    new Producto("JABÓN DE COCO, NARANJA Y ROMERO", 1700, 2),
+    new Producto("JABÓN DE CHOCOLATE Y ALMENDRA", 1600, 5),
+    new Producto("JABÓN DE VAINILLA", 1800, 1)
+];
+
+console.log(listaDeCompras);
+
+
+let continuar = true;
+
+while (continuar) {
+    let ingreso = prompt('Ingresa los datos del producto: nombre, precio, cantidad, separados por una barra diagonal ("\\"). Ingresa X para finalizar');
+    if (ingreso.toUpperCase() == 'X') {
+        continuar = false;
+        break;
+    }
+
+    let datos = ingreso.split('\\');
+    const Compras = new Producto(datos[0], datos[1], datos[2]);
+
+    listaDeCompras.push(Compras);
+
+    console.log(listaDeCompras);
+}
+
+let eleccion = prompt('Elegí la opción deseada:\n1 - Precio de mayor a menor \n2 - Precio de menor a mayor');
+
+function ordenar(eleccion, array) {
+    let arrayOrdenado = array.slice(0);
+
+
+    switch (eleccion) {
+        case '1':
+            return arrayOrdenado.sort((a, b) => b.precio - a.precio);
+        case '2':
+            return arrayOrdenado.sort((a, b) => a.precio - b.precio);
+        default:
+            alert('No es una opción válido');
+            break;
+    }
+}
+
+
+function crearStringResultado(array) {
+    let info = '';
+
+    array.forEach(elemento => {
+        info += '\nnombre: ' + elemento.nombre + '\n$: ' + elemento.precio + '\ncantidad: ' + elemento.cantidad;
+    })
+
+    return info;
+
+}
+alert(crearStringResultado(ordenar(eleccion, listaDeCompras)))
+
+
+
+
+const MisCompras = [{
+    nombre: "JABÓN DE ALMENDRA",
+    precio: 1500,
+    cantidad: 2,
+    total: function () {
+        return this.precio * this.cantidad;
+    }
+}];
+
+alert(MisCompras[0].total());
